@@ -59,7 +59,6 @@ func (a *AntiEntropy) listener() {
 }
 
 func (a *AntiEntropy) Set(value int64) {
-	a.lg.Printf("Set %d", value)
 	a.mux.Lock()
 	defer a.mux.Unlock()
 	a.timestamp = time.Now().Unix()
@@ -67,7 +66,6 @@ func (a *AntiEntropy) Set(value int64) {
 }
 
 func (a *AntiEntropy) Get() int64 {
-	a.lg.Println("Get")
 	a.mux.Lock()
 	defer a.mux.Unlock()
 	return a.value

@@ -1,0 +1,15 @@
+syntax="proto3";
+
+option go_package="github.com/Zzocker/multicast/protos";
+
+
+message Data{
+    int64 value = 1;
+}
+
+message Empty{}
+
+service Multicast{
+    rpc Set(Data) returns (Empty);
+    rpc Get(Empty) returns (Data);
+}

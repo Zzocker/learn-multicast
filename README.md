@@ -14,3 +14,8 @@ service Multicast{
     rpc Get(Empty) returns (Data);
 }
 ```
+
+## How to use
+
+- Start Multicast server: `go run cmd/server/main.go -c 16`
+- Set `54` : `go run cmd/cli/main.go set -v 54`

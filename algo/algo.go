@@ -9,12 +9,12 @@ import (
 	"github.com/Zzocker/multicast/utils"
 )
 
-type ALGO_NAME int
+type ALGO_NAME string
 
 const (
-	ALGO_ANTI_ENTROPY ALGO_NAME = iota + 1
-	ALGO_RUMOR_MONGERING
-	ALGO_GOSSIP
+	ALGO_ANTI_ENTROPY    ALGO_NAME = "anti_entropy"
+	ALGO_RUMOR_MONGERING ALGO_NAME = "rumor_mongering"
+	ALGO_GOSSIP          ALGO_NAME = "gossip"
 )
 
 type Peer interface {
@@ -30,7 +30,7 @@ type Simulator struct {
 
 func (s *Simulator) Start(algoName ALGO_NAME, peerCount int) {
 	s.lg = log.New(os.Stdout, "[SIMULATOR] ", 0)
-	s.lg.Printf("algoName=%d, peerCount=%d", algoName, peerCount)
+	s.lg.Printf("algoName=%s, peerCount=%d", algoName, peerCount)
 
 	chans := make([]chan msg.MulticastMessage, peerCount)
 	chanBufferSize := 64
@@ -58,8 +58,6 @@ func (s *Simulator) Start(algoName ALGO_NAME, peerCount int) {
 		go s.peers[i].Start(neighbor)
 	}
 
-	for {
-	}
 }
 
 // neighborSelection returns array of index of its neighboring peers
@@ -84,7 +82,7 @@ func neighborSelection(id int, aux []bool) []int {
 
 func (s *Simulator) Set(value int64) {
 	id := utils.RandBetween(0, len(s.peers))
-	s.lg.Printf("Set call to peer %d", id)
+	s.lg.Printf("Set %d call to peer %d", value, id)
 	s.peers[id].Set(value)
 }
 
