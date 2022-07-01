@@ -19,3 +19,9 @@ service Multicast{
 
 - Start Multicast server: `go run cmd/server/main.go -c 16`
 - Set `54` : `go run cmd/cli/main.go set -v 54`
+- Get from multicast : `go run cmd/cli/main.go get`
+
+
+## References
+
+- [Epidemic and Gossip Protocols](https://www.youtube.com/watch?v=-36j_DGXEwE)
